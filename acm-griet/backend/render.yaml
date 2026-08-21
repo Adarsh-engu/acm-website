@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: acm-griet-backend
+    env: node
+    region: singapore
+    plan: free
+    rootDir: acm-griet/backend
+    buildCommand: npm install && npx prisma generate
+    startCommand: node src/index.js
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET_KEY
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false

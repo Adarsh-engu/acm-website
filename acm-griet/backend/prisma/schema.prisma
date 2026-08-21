@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+// We use SQLite for local development to make onboarding easier (no Docker/Postgres setup required).
+// For production on Render, this can be changed to "postgresql".
+datasource db {
+  provider = "postgresql"
+}
+
+model Application {
+  id                     String   @id @default(uuid())
+  fullName               String
+  rollNumber             String   @unique
+  yearOfStudy            String
+  branch                 String
+  section                String?
+  domainsInterested      String   // Stored as JSON string
+  mobileNumber           String
+  howKnow                String
+  whyJoin                String
+  expectations           String
+  status                 String   @default("pending")
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+}
+
+model Admin {
+  id             String   @id @default(uuid())
+  email          String   @unique
+  hashedPassword String
+  createdAt      DateTime @default(now())
+}
