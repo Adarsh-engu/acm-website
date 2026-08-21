@@ -18,7 +18,9 @@ const globalLimiter = rateLimit({
 });
 
 // Middleware
-const allowedOrigins = process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split(',') : '*';
+const allowedOrigins = process.env.CORS_ORIGINS === '*' 
+  ? '*' 
+  : (process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split(',') : '*');
 app.use(cors({ origin: allowedOrigins }));
 app.use(helmet()); // Secure HTTP headers
 app.use(morgan('combined')); // Structured request logging
